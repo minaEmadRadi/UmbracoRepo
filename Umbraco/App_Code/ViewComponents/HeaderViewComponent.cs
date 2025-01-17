@@ -20,7 +20,6 @@ namespace Umbraco.App_Code.ViewComponents
             try
             {
                 var umbracoContext = _umbracoContextAccessor.GetRequiredUmbracoContext()?.PublishedRequest?.PublishedContent;
-                //Value<IPublishedContent>("Categories").
                 var categories = umbracoContext?.AncestorOrSelf<BlogItem>()?.Categories?.AncestorOrSelf<CategoryItem>();
 
                 if (umbracoContext != null)

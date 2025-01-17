@@ -1,4 +1,4 @@
-﻿namespace Umbraco.umbraco.models.PaginatedList
+﻿namespace PocApp.Domain.models.PaginatedList
 {
     public class PaginatedList<T> : List<T>
     {

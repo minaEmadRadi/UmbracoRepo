@@ -1,4 +1,4 @@
-﻿namespace Umbraco.App_Code.Models.ViewComponentModels
+﻿namespace PocApp.Domain.Models.ViewComponentModels
 {
     public class BlogsView
     {

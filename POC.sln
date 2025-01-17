@@ -5,18 +5,30 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco", "Umbraco\Umbraco.csproj", "{3F14A377-BD16-4406-B525-9A78BE90FA84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApp.Domain", "PocApp.Domain\PocApp.Domain.csproj", "{7F0FAB38-07A7-4700-A546-BFD8142C72E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApp.Application", "PocApp.Application\PocApp.Application.csproj", "{EDF7D0F6-EF34-4EE8-9875-722FE3CF22DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3F14A377-BD16-4406-B525-9A78BE90FA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F14A377-BD16-4406-B525-9A78BE90FA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F14A377-BD16-4406-B525-9A78BE90FA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F14A377-BD16-4406-B525-9A78BE90FA84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0FAB38-07A7-4700-A546-BFD8142C72E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0FAB38-07A7-4700-A546-BFD8142C72E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0FAB38-07A7-4700-A546-BFD8142C72E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0FAB38-07A7-4700-A546-BFD8142C72E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF7D0F6-EF34-4EE8-9875-722FE3CF22DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF7D0F6-EF34-4EE8-9875-722FE3CF22DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF7D0F6-EF34-4EE8-9875-722FE3CF22DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF7D0F6-EF34-4EE8-9875-722FE3CF22DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

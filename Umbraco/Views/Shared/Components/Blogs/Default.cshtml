@@ -1,5 +1,5 @@
 ﻿@using Umbraco.App_Code.Models.ViewComponentModels;
-@using Umbraco.umbraco.models.PaginatedList;
+@using PocApp.Domain.models.PaginatedList;
 @model PaginatedList<BlogsView>
 @{
     var query = Context?.Request?.Query["page"].ToString();
@@ -28,8 +28,8 @@
 <div class="d-flex justify-content-between mb-4">
     @if (page > 1)
     {
-        <a class="btn btn-primary text-uppercase @prevDisbled" href="/home?page=@(page -1)"> ← Back</a>
+        <a class="btn btn-primary text-uppercase @prevDisbled" href="/blogs?page=@(page -1)"> ← Back</a>
     }
 
-    <a class="btn btn-primary text-uppercase @nextDisbled"  href="/home?page=@(page +1)"> Next → </a>
+    <a class="btn btn-primary text-uppercase @nextDisbled"  href="/blogs?page=@(page +1)"> Next → </a>
     </div>

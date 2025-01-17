@@ -2,7 +2,7 @@
 using Umbraco.App_Code.Models.ViewComponentModels;
 using Umbraco.Cms.Web.Common;
 using Umbraco.Cms.Web.Common.PublishedModels;
-using Umbraco.umbraco.models.PaginatedList;
+using PocApp.Domain.models.PaginatedList;
 
 namespace Umbraco.App_Code.ViewComponents
 {
@@ -22,7 +22,7 @@ namespace Umbraco.App_Code.ViewComponents
             try
             {
                 var Content = umbracoHelper?.ContentAtRoot()?.FirstOrDefault(x => x.IsDocumentType("home"))?
-                    .Children()?.FirstOrDefault(x => x.IsDocumentType("mainBlog")) as MainBlog;
+                    .Children()?.FirstOrDefault(x => x.IsDocumentType("blogList")) as BlogList;
                 if (Content == null) { return View(); }
                 foreach (BlogItem blogNode in Content?.Children ?? new List<BlogItem>())
                 {
