@@ -10,6 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 builder.Services.Configure<UmbracoConfig>(configuration.GetSection("Umbraco"));
 builder.Services.AddScoped<IUmbracoApiService, UmbracoApiService>();
+
 builder.Services.AddHttpClient<IUmbracoApiService>((serviceProvider, client) =>
 {
     var config = serviceProvider.GetRequiredService<IOptions<UmbracoConfig>>().Value;
@@ -30,7 +31,7 @@ builder.CreateUmbracoBuilder()
    .AddBackOffice()
    .AddWebsite()
    .AddDeliveryApi()
-   .AddComposers()
+    .AddComposers()
    .Build();
 
 WebApplication app = builder.Build();

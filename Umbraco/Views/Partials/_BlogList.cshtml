@@ -1,0 +1,39 @@
+﻿@using PocApp.Domain.models.PaginatedList
+@using PocApp.Domain.models.ViewComponentModels
+@model PaginatedList<BlogsView>
+@{
+    var prevDisabled = ViewBag.PrevDisabled;
+    var nextDisabled = ViewBag.NextDisabled;
+    var currentPage = ViewBag.Page;
+    var totalPages = ViewBag.TotalPages;
+}
+
+<div class="blog-list">
+    @foreach (var blog in Model ?? new List<BlogsView>())
+    {
+        <article class="blog-item">
+            <h2>@blog.Title</h2>
+            <h3>@blog.SubTitle</h3>
+            <div class="category">@blog.Category</div>
+            <div class="date">Published: @blog.PublishDate</div>
+            <div class="preview">@Html.Raw(blog.BlogBody)</div>
+            <a href="@blog.BlogUrl" class="read-more">Read More</a>
+        </article>
+    }
+</div>
+
+<nav class="pagination">
+    <a href="?page=@(currentPage - 1)"
+       class="prev @prevDisabled">
+        Previous
+    </a>
+
+    <span class="page-info">
+        Page @currentPage of @totalPages
+    </span>
+
+    <a href="?page=@(currentPage + 1)"
+       class="next @nextDisabled">
+        Next
+    </a>
+</nav>
