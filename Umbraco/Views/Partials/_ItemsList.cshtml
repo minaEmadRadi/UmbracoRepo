@@ -1,23 +1,23 @@
-﻿@using Umbraco.Controllers
-@model PaginatedResult<BlogItem>
+﻿@* @using Umbraco.Controllers *@
+@* @model PaginatedResult<BlogItem> *@
 
-<div id="itemsContainer">
-    @foreach (var item in Model.Items)
-    {
-        <div class="item-card" data-id="@item.Id">
-            <h3>@item.Name</h3>
-        </div>
-    }
-</div>
+@* <div id="itemsContainer"> *@
+@*     @foreach (var item in Model.Items) *@
+@*     { *@
+@*         <div class="item-card" data-id="@item.Id"> *@
+@*             <h3>@item.Name</h3> *@
+@*         </div> *@
+@*     } *@
+@* </div> *@
 
-<div class="pagination" id="pagination">
-    @for (var i = 1; i <= Model.TotalPages; i++)
-    {
-        <button class="page-btn @(i == Model.CurrentPage ? "active" : "")"
-                onclick="loadPage(@i)"
-        @(i == Model.CurrentPage ? "disabled" : "")>
-            @i
-        </button>
-    }
-</div>
+@* <div class="pagination" id="pagination"> *@
+@*     @for (var i = 1; i <= Model.TotalPages; i++) *@
+@*     { *@
+@*         <button class="page-btn @(i == Model.CurrentPage ? "active" : "")" *@
+@*                 onclick="loadPage(@i)" *@
+@*         @(i == Model.CurrentPage ? "disabled" : "")> *@
+@*             @i *@
+@*         </button> *@
+@*     } *@
+@* </div> *@
 

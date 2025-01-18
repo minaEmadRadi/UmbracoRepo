@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Umbraco.App_Code.Models.ViewComponentModels;
 using Umbraco.Cms.Web.Common;
 using Umbraco.Cms.Web.Common.PublishedModels;
 using PocApp.Domain.models.PaginatedList;
+using PocApp.Domain.models.ViewComponentModels;
 
 namespace Umbraco.App_Code.ViewComponents
 {

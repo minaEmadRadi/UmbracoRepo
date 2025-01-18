@@ -1,5 +1,5 @@
-﻿@using Umbraco.App_Code.Models.ViewComponentModels;
-@using PocApp.Domain.models.PaginatedList;
+﻿@using PocApp.Domain.models.PaginatedList
+@using PocApp.Domain.models.ViewComponentModels
 @model PaginatedList<BlogsView>
 @{
     var query = Context?.Request?.Query["page"].ToString();

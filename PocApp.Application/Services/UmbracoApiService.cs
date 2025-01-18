@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using PocApp.Domain.Interfaces;
+using PocApp.Domain.models.ViewComponentModels;
 using PocApp.Domain.Models;
-using PocApp.Domain.Models.ViewComponentModels;
 namespace PocApp.Application.Services
 {
     public class UmbracoApiService : IUmbracoApiService
