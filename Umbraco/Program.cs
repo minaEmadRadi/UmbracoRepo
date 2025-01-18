@@ -1,12 +1,15 @@
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Options;
+using PocApp.Application.Services;
 using PocApp.Domain.Interfaces;
 using PocApp.Domain.Models;
+using Umbraco.Cms.Web.Website.Controllers;
+using Umbraco.Controllers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 builder.Services.Configure<UmbracoConfig>(configuration.GetSection("Umbraco"));
-
+builder.Services.AddScoped<IUmbracoApiService, UmbracoApiService>();
 builder.Services.AddHttpClient<IUmbracoApiService>((serviceProvider, client) =>
 {
     var config = serviceProvider.GetRequiredService<IOptions<UmbracoConfig>>().Value;
@@ -19,6 +22,10 @@ builder.Services.AddHttpClient<IUmbracoApiService>((serviceProvider, client) =>
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
+builder.Services.Configure<UmbracoRenderingDefaultsOptions>(c =>
+{
+    c.DefaultControllerType = typeof(BlogListController);
+});
 builder.CreateUmbracoBuilder()
    .AddBackOffice()
    .AddWebsite()

@@ -1,4 +1,4 @@
-﻿namespace PocApp.Domain.Models.ViewComponentModels
+﻿namespace PocApp.Domain.models.ViewComponentModels
 {
     public class HeaderView
     {

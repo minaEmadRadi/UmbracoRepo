@@ -1,4 +1,4 @@
-﻿namespace PocApp.Domain.Models.ViewComponentModels
+﻿namespace PocApp.Domain.models.ViewComponentModels
 {
     public class BlogsView
     {
@@ -10,6 +10,9 @@
         public string AuthorUrl { get; set; }
         public string CreatedDate { get; set; }
         public string Category { get; set; }
-
+        public string GUId { get; set; }
+        public string Name { get; set; }
+        public string BlogBody { get; set; }
+        public string PublishDate { get; set; }
     }
 }
