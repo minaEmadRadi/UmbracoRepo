@@ -17,23 +17,38 @@
 @section Scripts {
     <script>
         function loadPage(pageNumber) {
-            $.ajax({
-                url: `/umbraco/delivery/api/v2/content?fetch=Children:Blogs`,
-                method: 'GET',
-                headers: {
-                    'Accept-Language': language
-                    'Api-Key':'Mina-Emad-Radi'
-                },
-                success: function(data) {
-                   $('#partial-content').html(data);
-                },
-                error: function(xhr, status, error) {
-                      alert(`Error ${error} loading partial view.`);
-                }
+           var settings = {
+              "url": "https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&skip=1&take=1",
+              "method": "GET",
+              "timeout": 0,
+              "headers": {
+                "Accept-Language": "en-Us",
+                "Api-Key": "Mina-Emad-Radi"
+              },
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+               let contentHtml = '';
+                 response.items.forEach(item => {
+                    contentHtml += `
+                        <div class="blog-item">
+                            <h2>${item.properties.title}</h2>
+                            <h3>${item.properties.subtitle}</h3>
+                            <img src="${item.properties.headerImage[0]?.url}" alt="${item.properties.headerImage[0]?.name}" width="600" height="400" />
+                            <p>${item.properties.bodyText.markup}</p>
+                            <a href="${item.route.path}">Read More</a>
+                        </div>
+                    `;
+                });
+                 $('#partial-content').html(contentHtml);
+           
             });
+          
         }
 
         $(document).ready(function() {
+           debugger;  
             loadPage(1);
         });
     </script>
