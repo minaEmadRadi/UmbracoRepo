@@ -37,7 +37,7 @@ namespace Umbraco.Infrastructure
                 "Error {RequestId}: {Message}",
                 error.RequestId,
                 error.Message);
-
+/*
             if (IsApiRequest(context.HttpContext.Request))
             {
                 context.Result = new JsonResult(error)
@@ -59,16 +59,16 @@ namespace Umbraco.Infrastructure
                 };
 
                 ((ViewResult)context.Result).ViewData["ErrorMessage"] = error.Message;
-            }
+            }*/
             context.ExceptionHandled = true;
 
         }
 
-        private bool IsApiRequest(HttpRequest request)
+    /*    private bool IsApiRequest(HttpRequest request)
         {
             return request.Headers["Accept"].ToString().Contains("application/json") ||
                    request.Path.StartsWithSegments("/api");
-        }
+        }*/
 
     }
 }

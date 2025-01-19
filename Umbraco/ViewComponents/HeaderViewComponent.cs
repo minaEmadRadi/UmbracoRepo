@@ -4,7 +4,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.PublishedModels;
 
-namespace Umbraco.App_Code.ViewComponents
+namespace Umbraco.ViewComponents
 {
     [ViewComponent]
     public class HeaderViewComponent : ViewComponent

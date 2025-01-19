@@ -4,7 +4,7 @@ using PocApp.Domain.models.ViewComponentModels;
 using Umbraco.Cms.Web.Common;
 using Umbraco.Cms.Web.Common.PublishedModels;
 
-namespace Umbraco.App_Code.ViewComponents
+namespace Umbraco.ViewComponents
 {
     [ViewComponent]
     public class BlogsViewComponent : ViewComponent
