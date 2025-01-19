@@ -1,5 +1,6 @@
 ﻿@{
-	Layout = "_Layout";
+    Layout = "_Layout";
+    var language = "en-Us";
 }
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
@@ -8,21 +9,21 @@
                 <div id="partial-content">
 
                 </div>
-                @* <vc:blogs page="@(int.TryParse(Context?.Request?.Query["page"], out int page) ? page : 1)" /> *@
             </div>
         </div>
     </div>
 </article>
 
-
 @section Scripts {
     <script>
-
         function loadPage(pageNumber) {
-
             $.ajax({
-                url: `/umbraco/surface/PartialBlogList/index?page=${pageNumber}&currentCulture=ar`,
+                url: `/umbraco/delivery/api/v2/content?fetch=Children:Blogs`,
                 method: 'GET',
+                headers: {
+                    'Accept-Language': language
+                    'Api-Key':'Mina-Emad-Radi'
+                },
                 success: function(data) {
                    $('#partial-content').html(data);
                 },
@@ -37,4 +38,3 @@
         });
     </script>
 }
-

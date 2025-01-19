@@ -25,7 +25,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Header Image</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::Umbraco.Cms.Core.Models.MediaWithCrops HeaderImage { get; }
+		global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue HeaderImage { get; }
 
 		/// <summary>Subtitle</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
@@ -75,12 +75,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("headerImage")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops HeaderImage => GetHeaderImage(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue HeaderImage => GetHeaderImage(this, _publishedValueFallback);
 
 		/// <summary>Static getter for Header Image</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetHeaderImage(IHeaderProperties that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "headerImage");
+		public static global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue GetHeaderImage(IHeaderProperties that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue>(publishedValueFallback, "headerImage");
 
 		///<summary>
 		/// Subtitle: Enter The Subtitle for this page
