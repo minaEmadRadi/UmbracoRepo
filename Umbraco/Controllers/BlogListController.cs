@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -32,6 +33,7 @@ namespace Umbraco.Controllers
         public override IActionResult Index()
         {
 
+
             var content = _publishedContentQuery?.Content(Guid.Parse("c3284a36-2187-48f7-93ed-6b235668aaa5"))
                 //?.ChildrenOfType("blogItem")?
                 //.Where(x => x.IsVisible())
@@ -62,6 +64,9 @@ namespace Umbraco.Controllers
         [HttpGet]
         public IActionResult SetCulture(string culture)
         {
+            var currentculture = new CultureInfo(culture);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = currentculture;
+            var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
             _variationContextAccessor.VariationContext = new VariationContext(culture);
             return Ok($"Culture set to {culture}");
         }

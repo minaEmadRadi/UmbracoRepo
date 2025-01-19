@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Umbraco.Cms.Web.Common;
-using Umbraco.Cms.Web.Common.PublishedModels;
 using PocApp.Domain.models.PaginatedList;
 using PocApp.Domain.models.ViewComponentModels;
+using Umbraco.Cms.Web.Common;
+using Umbraco.Cms.Web.Common.PublishedModels;
 
 namespace Umbraco.App_Code.ViewComponents
 {
@@ -44,7 +44,13 @@ namespace Umbraco.App_Code.ViewComponents
             catch
             {
             }
-            return View(PaginatedList<BlogsView>.Create(blogs.AsQueryable(), page ?? 1, pageSize));
+            var paginatedList = PaginatedList<BlogsView>.Create(blogs.AsQueryable(), page ?? 1, pageSize);
+
+            // Pass the current page and total pages to the view
+            ViewBag.CurrentPage = paginatedList.PageIndex;
+            ViewBag.TotalPages = paginatedList.TotalPages;
+
+            return View(paginatedList);
 
         }
     }

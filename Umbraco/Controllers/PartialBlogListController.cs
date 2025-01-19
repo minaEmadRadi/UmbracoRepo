@@ -16,7 +16,7 @@ namespace Umbraco.Controllers
     public class PartialBlogListController : SurfaceController
     {
         private readonly IPublishedContentQuery _publishedContentQuery;
-        private const int DefaultPageSize = 10;
+        private const int DefaultPageSize = 1;
         private readonly Guid BlogListNodeId = Guid.Parse("c3284a36-2187-48f7-93ed-6b235668aaa5");
         private readonly ILogger<PartialBlogListController> _logger;
 
@@ -35,26 +35,23 @@ namespace Umbraco.Controllers
             _logger = logger;
             _publishedContentQuery = publishedContentQuery;
         }
-        public IActionResult Index()
-        {
-            var paginatedList = GetPaginatedBlogs(1, 2);
-            SetViewBag(paginatedList, 1);
-            return View("~/Views/Partials/_BlogList.cshtml", paginatedList);
-        }
 
-        public IActionResult Index(int page = 1, int pageSize = DefaultPageSize)
+
+        public IActionResult Index(int page = 1, int pageSize = DefaultPageSize, string? currentCulture = "en-Us")
         {
-            var paginatedList = GetPaginatedBlogs(page, pageSize);
+            var paginatedList = GetPaginatedBlogs(page, pageSize, currentCulture);
             SetViewBag(paginatedList, page);
-            return View("~/Views/Partials/_BlogList.cshtml", paginatedList);
+            return PartialView("~/Views/Partials/_BlogList.cshtml", paginatedList);
         }
-        private PaginatedList<BlogsView> GetPaginatedBlogs(int page = 1, int pageSize = DefaultPageSize)
+        private PaginatedList<BlogsView> GetPaginatedBlogs(int page = 1, int pageSize = DefaultPageSize, string? currentCulture = "en-Us")
         {
+
             var allBlogItems = _publishedContentQuery?
                 .Content(BlogListNodeId)?
                 .ChildrenOfType("blogItem")?
                 .Where(x => x.IsVisible())?
                 .OrderByDescending(x => x.CreateDate);
+            //throw new Exception();
 
             if (allBlogItems == null) return new PaginatedList<BlogsView>(new List<BlogsView>(), 0, page, pageSize);
 
@@ -63,15 +60,15 @@ namespace Umbraco.Controllers
             var paginatedItems = allBlogItems
                 .Select(content => new BlogsView
                 {
-                    Title = content.Value<string>("title") ?? string.Empty,
-                    SubTitle = content.Value<string>("subtitle") ?? string.Empty,
-                    BlogBody = content.Value<string>("bodyText") ?? string.Empty,
-                    BlogUrl = content.Url() ?? string.Empty,
-                    CreatedDate = content.CreateDate.ToString("D"),
-                    PublishDate = content.Value<DateTime>("creationDate").ToString("D"),
-                    Category = content.Value<IEnumerable<IPublishedContent>>("categories")?
-                        .FirstOrDefault()?
-                        .Value<string>("name") ?? string.Empty,
+                    Title = content.Value<string>("title", culture: currentCulture) ?? string.Empty,
+                    SubTitle = content.Value<string>("subtitle", culture: currentCulture) ?? string.Empty,
+                    BlogBody = content.Value<string>("bodyText", culture: currentCulture) ?? string.Empty,
+                    BlogUrl = content.Url(culture: currentCulture) ?? string.Empty, // Apply culture to URL
+                    CreatedDate = content.CreateDate.ToString("D"), // Apply culture to date formatting
+                    PublishDate = content.Value<DateTime>("creationDate", culture: currentCulture).ToString("D"), // Apply culture to date formatting
+                    Category = content.Value<IEnumerable<IPublishedContent>>("categories", culture: currentCulture)?
+            .FirstOrDefault()?
+            .Value<string>("name", culture: currentCulture) ?? string.Empty,
                 })
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -79,6 +76,7 @@ namespace Umbraco.Controllers
 
             return new PaginatedList<BlogsView>(paginatedItems, totalItems, page, pageSize);
         }
+
         private void SetViewBag(PaginatedList<BlogsView> paginatedList, int page)
         {
             ViewBag.Page = page;

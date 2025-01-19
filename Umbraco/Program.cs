@@ -5,6 +5,7 @@ using PocApp.Domain.Interfaces;
 using PocApp.Domain.Models;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco.Controllers;
+using Umbraco.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -22,6 +23,10 @@ builder.Services.AddHttpClient<IUmbracoApiService>((serviceProvider, client) =>
     }
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
 
 builder.Services.Configure<UmbracoRenderingDefaultsOptions>(c =>
 {
@@ -31,8 +36,9 @@ builder.CreateUmbracoBuilder()
    .AddBackOffice()
    .AddWebsite()
    .AddDeliveryApi()
-    .AddComposers()
+.AddComposers()
    .Build();
+builder.Services.AddTransient<LanguageController>();
 
 WebApplication app = builder.Build();
 
@@ -50,5 +56,7 @@ app.UseUmbraco()
        u.UseBackOfficeEndpoints();
        u.UseWebsiteEndpoints();
    });
+
+
 
 await app.RunAsync();

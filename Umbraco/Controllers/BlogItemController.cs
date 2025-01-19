@@ -29,18 +29,12 @@ namespace Umbraco.Controllers
 
         public override IActionResult Index()
         {
-
             var blogItem = CurrentPage;
 
             return CurrentTemplate(blogItem);
         }
 
-        [HttpGet]
-        public IActionResult SetCulture(string culture)
-        {
-            _variationContextAccessor.VariationContext = new VariationContext(culture);
-            return Ok($"Culture set to {culture}");
-        }
+
 
 
 

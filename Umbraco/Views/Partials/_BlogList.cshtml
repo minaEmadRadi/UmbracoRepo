@@ -1,39 +1,40 @@
 ﻿@using PocApp.Domain.models.PaginatedList
 @using PocApp.Domain.models.ViewComponentModels
+@inject IVariationContextAccessor VariationContextAccessor
+
 @model PaginatedList<BlogsView>
 @{
-    var prevDisabled = ViewBag.PrevDisabled;
-    var nextDisabled = ViewBag.NextDisabled;
-    var currentPage = ViewBag.Page;
-    var totalPages = ViewBag.TotalPages;
+    var currentCulture = VariationContextAccessor.VariationContext?.Culture;
+    var prevDisbled = !Model.HasPreviousPage ? "d-none" : "";
+    var nextDisbled = !Model.HasNextPage ? "d-none" : "";
 }
 
-<div class="blog-list">
-    @foreach (var blog in Model ?? new List<BlogsView>())
+@foreach (var item in Model ?? new List<BlogsView>())
+{
+    <hr class="my-4" />
+
+    <div class="post-preview">
+        <a href="@item.BlogUrl">
+            <h2 class="post-title">@item.Title</h2>
+            <h3 class="post-subtitle">@item.SubTitle</h3>
+        </a>
+        <span class="badge bg-secondary">@item.Category</span>
+        <p class="post-meta">
+            Posted by
+            <a href="#!">@item.CreatedBy</a>
+            on @item.CreatedDate
+        </p>
+    </div>
+    <hr class="my-4" />
+}
+<div class="d-flex justify-content-between mb-4">
+    @if (ViewBag.page > 1)
     {
-        <article class="blog-item">
-            <h2>@blog.Title</h2>
-            <h3>@blog.SubTitle</h3>
-            <div class="category">@blog.Category</div>
-            <div class="date">Published: @blog.PublishDate</div>
-            <div class="preview">@Html.Raw(blog.BlogBody)</div>
-            <a href="@blog.BlogUrl" class="read-more">Read More</a>
-        </article>
+        <a class="btn btn-primary text-uppercase @prevDisbled" onclick="loadPage(@(ViewBag.page - 1))"> ← Back</a>
+    }
+
+    @if (ViewBag.page < ViewBag.TotalPages)
+    {
+        <a class="btn btn-primary text-uppercase @nextDisbled" onclick="loadPage(@(ViewBag.page + 1))"> Next → </a>
     }
 </div>
-
-<nav class="pagination">
-    <a href="?page=@(currentPage - 1)"
-       class="prev @prevDisabled">
-        Previous
-    </a>
-
-    <span class="page-info">
-        Page @currentPage of @totalPages
-    </span>
-
-    <a href="?page=@(currentPage + 1)"
-       class="next @nextDisabled">
-        Next
-    </a>
-</nav>

@@ -1,19 +1,40 @@
-﻿
-@{
+﻿@{
 	Layout = "_Layout";
-
 }
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <vc:blogs page="@(int.TryParse(Context?.Request?.Query["page"], out int page) ? page : 1)" />
+                <div id="partial-content">
+
+                </div>
+                @* <vc:blogs page="@(int.TryParse(Context?.Request?.Query["page"], out int page) ? page : 1)" /> *@
             </div>
         </div>
     </div>
 </article>
 
-<div class="container mx-auto px-4 py-8">
-</div>
 
+@section Scripts {
+    <script>
+
+        function loadPage(pageNumber) {
+
+            $.ajax({
+                url: `/umbraco/surface/PartialBlogList/index?page=${pageNumber}&currentCulture=ar`,
+                method: 'GET',
+                success: function(data) {
+                   $('#partial-content').html(data);
+                },
+                error: function(xhr, status, error) {
+                      alert(`Error ${error} loading partial view.`);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            loadPage(1);
+        });
+    </script>
+}
 

@@ -1,9 +1,10 @@
 ﻿@using PocApp.Domain.models.PaginatedList
 @using PocApp.Domain.models.ViewComponentModels
+@inject IVariationContextAccessor VariationContextAccessor
+
 @model PaginatedList<BlogsView>
 @{
-    var query = Context?.Request?.Query["page"].ToString();
-    var page = string.IsNullOrWhiteSpace (query)?1 : Convert.ToInt32(query);
+    var currentCulture = VariationContextAccessor.VariationContext?.Culture;
     var prevDisbled = !Model.HasPreviousPage ? "d-none" : "";
     var nextDisbled = !Model.HasNextPage ? "d-none" : "";
 }
@@ -25,11 +26,12 @@
     </div>
     <hr class="my-4" />
 }
+
 <div class="d-flex justify-content-between mb-4">
-    @if (page > 1)
+    @if (ViewBag.CurrentPage > 1)
     {
-        <a class="btn btn-primary text-uppercase @prevDisbled" href="/blogs?page=@(page -1)"> ← Back</a>
+        <a class="btn btn-primary text-uppercase @prevDisbled" href="/blogs?page=@(ViewBag.CurrentPage - 1)"> ← Back</a>
     }
 
-    <a class="btn btn-primary text-uppercase @nextDisbled"  href="/blogs?page=@(page +1)"> Next → </a>
+    <a class="btn btn-primary text-uppercase @nextDisbled" href="/blogs?page=@(ViewBag.CurrentPage + 1)"> Next → </a>
     </div>
