@@ -17,7 +17,6 @@ namespace Umbraco.Controllers
         private readonly ILogger<BlogItemController> _logger;
         private readonly IVariationContextAccessor _variationContextAccessor;
 
-
         public BlogItemController(IPublishedContentQuery publishedContentQuery, ILogger<BlogItemController> logger, ICompositeViewEngine compositeViewEngine, IUmbracoContextAccessor umbracoContextAccessor, IVariationContextAccessor variationContextAccessor, ServiceContext serviceContext)
         : base(logger, compositeViewEngine, umbracoContextAccessor)
         {
@@ -30,7 +29,6 @@ namespace Umbraco.Controllers
         public override IActionResult Index()
         {
             var blogItem = CurrentPage;
-
             return CurrentTemplate(blogItem);
         }
 

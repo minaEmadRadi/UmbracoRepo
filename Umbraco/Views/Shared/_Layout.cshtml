@@ -13,7 +13,6 @@
 </head>
 <body>
     @await Html.PartialAsync("~/Views/Partials/_Navigation.cshtml", Model)
-    @* @await Html.PartialAsync("~/Views/Partials/_Header.cshtml", Model) *@
 	<vc:header />
     @RenderBody()
     @await Html.PartialAsync("~/Views/Shared/_Toast.cshtml", Model)
