@@ -17,10 +17,12 @@
     <script>
         
         function loadPage(pageNumber) {
-           
+            
+            const skip = (pageNumber - 1) * 3;
+
             var settings = 
             {
-              "url": `https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&expand=properties[coordinates]&skip=${pageNumber-1*3}&take=3`,
+              "url": `https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&skip=${skip}&take=3`,
               "method": "GET",
               "timeout": 0,
               "headers": {
@@ -40,6 +42,7 @@
 
                 let contentHtml = '';
 
+                console.log(response.items);
                 response.items.forEach(item => {
 
                    
@@ -97,8 +100,10 @@
                 let paginationHtml = `
                                     <div class="d-flex justify-content-between mb-4">
                                         ${pageNumber > 1 ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">← Back</a>` : ''}
-                                        ${pageNumber < response.total ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>` : ''}
-                                    </div>
+                                        ${skip + response.items.length < response.total ?
+                                            `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>`
+                                            : ''}                                    
+                                   </div>
                                 `;
 
                 $('#partial-content').html(contentHtml + paginationHtml);
