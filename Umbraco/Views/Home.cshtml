@@ -1,5 +1,7 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
 @{
 	Layout = "_Layout";
 }
+@await Html.PartialAsync("~/Views/Partials/_Header.cshtml", Model)
+
 

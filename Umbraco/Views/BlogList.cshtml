@@ -1,7 +1,9 @@
-﻿@{
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlogList>
+@{
     Layout = "_Layout";
     var language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
+@await Html.PartialAsync("~/Views/Partials/_Header.cshtml",Model)
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -14,7 +16,18 @@
 </article>
 
 @section Scripts {
+    
     <script>
+          const translations = {
+            'en': {
+                next: 'Next →',
+                back: '← Back'
+            },
+            'ar': {
+                next: 'التالي ←',
+                back: '→ السابق'
+            }
+        };
         
         function loadPage(pageNumber) {
             
@@ -85,8 +98,7 @@
                             </a>
                             <span class="badge bg-secondary">${item.properties.categories[0].name || 'Uncategorized'}</span>
                                <p class="post-meta" style="display: inline;">
-                                        Posted by
-                                on ${ createDate || 'N/A'}
+                                         ${ createDate || 'N/A'}
                             </p>
                         </div>
                         <div class="col-3 ">
@@ -97,14 +109,18 @@
                     `;
                 });
 
+                const currentTranslations = translations["@language"] || translations['en'];
+
                 let paginationHtml = `
-                                    <div class="d-flex justify-content-between mb-4">
-                                        ${pageNumber > 1 ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">← Back</a>` : ''}
-                                        ${skip + response.items.length < response.total ?
-                                            `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>`
-                                            : ''}                                    
-                                   </div>
-                                `;
+                    <div class="d-flex ${"@language" === 'ar' ? 'flex-row-reverse' : ''} justify-content-between mb-4">
+                        ${pageNumber > 1 ?
+                            `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">${currentTranslations.back}</a>`
+                            : ''}
+                        ${skip + response.items.length < response.total ?
+                            `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">${currentTranslations.next}</a>`
+                            : ''}
+                    </div>
+                `;
 
                 $('#partial-content').html(contentHtml + paginationHtml);
 

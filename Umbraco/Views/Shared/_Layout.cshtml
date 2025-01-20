@@ -13,7 +13,6 @@
 </head>
 <body>
     @await Html.PartialAsync("~/Views/Partials/_Navigation.cshtml", Model)
-    @await Html.PartialAsync("~/Views/Partials/_Header.cshtml", Model)
     @RenderBody()
     @await Html.PartialAsync("~/Views/Partials/_Footer.cshtml", Model)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
