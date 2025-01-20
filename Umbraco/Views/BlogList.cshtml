@@ -52,6 +52,7 @@
 
                 $('#partial-content').html('');
                 const lang = "@language" === "ar" ? "ar-EG" : "@language";
+                const dir = "@language" === "ar" ? "rtl" : "ltr";
 
                 let contentHtml = '';
 
@@ -86,7 +87,7 @@
 
                     contentHtml += `
                         <hr class="my-4" />
-                         <div class="row">
+                         <div class="row"  dir="${dir}">
                         <div class="post-preview col-9">
                             <a href="${item.route.path}">
                                 

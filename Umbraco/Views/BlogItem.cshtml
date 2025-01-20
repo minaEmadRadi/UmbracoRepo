@@ -7,13 +7,13 @@
 }
 @await Html.PartialAsync("~/Views/Partials/_Header.cshtml", Model)
 
-<div class="@(isRTL ? "text-end" : "text-start")" dir="@(isRTL ? "rtl" : "ltr")">
+<div  dir="@(isRTL ? "rtl" : "ltr")">
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <span class="badge bg-secondary @(isRTL ? "ms-2" : "me-2")">@category</span>
-                <div class="@(isRTL ? "text-end" : "text-start")">
+                <div >
                     @Model.BodyText
                 </div>
             </div>
