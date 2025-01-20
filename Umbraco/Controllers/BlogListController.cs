@@ -28,7 +28,7 @@ namespace Umbraco.Controllers
 
         public override IActionResult Index()
         {
-
+            _logger.LogError("Hello, Error! From BlogList Page");
             return CurrentTemplate(CurrentPage);
         }
 
