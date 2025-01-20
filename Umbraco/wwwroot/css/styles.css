@@ -143,7 +143,32 @@ h2, .h2 {
     font-size: 2rem;
   }
 }
+#mainNav {
+    background-color: #ffffff; /* White background */
+    padding: 1rem 0; /* Add some padding */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+#mainNav {
+    position: relative; /* Required for pseudo-element positioning */
+    background-color: transparent; /* Make the navbar background transparent */
+    z-index: 1; /* Ensure the navbar content is above the mask */
+}
 
+#mainNav::before {
+    content: ''; /* Required for pseudo-element */
+    position: absolute; /* Position the mask absolutely */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white mask */
+    z-index: -1; /* Place the mask behind the navbar content */
+    border-radius: 8px; /* Optional: Add rounded corners */
+}
+#mainNav:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Increase shadow on hover */
+}
 h3, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
