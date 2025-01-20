@@ -1,5 +1,3 @@
-using System.Net.Http.Headers;
-using Microsoft.Extensions.Options;
 using PocApp.Application.Services;
 using PocApp.Domain.Interfaces;
 using Umbraco.Infrastructure;

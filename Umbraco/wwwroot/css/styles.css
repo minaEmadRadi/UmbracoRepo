@@ -128,7 +128,13 @@ h1, .h1 {
     font-size: 2.5rem;
   }
 }
-
+.list-image{
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+    display: inline;
+    margin-block-start:30px;
+}
 h2, .h2 {
   font-size: calc(1.325rem + 0.9vw);
 }

@@ -15,14 +15,11 @@ namespace Umbraco.Controllers
 
         private readonly IPublishedContentQuery _publishedContentQuery;
         private readonly ILogger<BlogItemController> _logger;
-        private readonly IVariationContextAccessor _variationContextAccessor;
 
         public BlogItemController(IPublishedContentQuery publishedContentQuery, ILogger<BlogItemController> logger, ICompositeViewEngine compositeViewEngine, IUmbracoContextAccessor umbracoContextAccessor, IVariationContextAccessor variationContextAccessor, ServiceContext serviceContext)
         : base(logger, compositeViewEngine, umbracoContextAccessor)
         {
-
             _logger = logger;
-            _variationContextAccessor = variationContextAccessor;
             _publishedContentQuery = publishedContentQuery;
         }
 
@@ -31,12 +28,6 @@ namespace Umbraco.Controllers
             var blogItem = CurrentPage;
             return CurrentTemplate(blogItem);
         }
-
-
-
-
-
-
 
     }
 

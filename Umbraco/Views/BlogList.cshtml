@@ -1,13 +1,12 @@
 ﻿@{
     Layout = "_Layout";
-    var language = "en-Us";
+    var language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div id="partial-content">
-
                 </div>
             </div>
         </div>
@@ -18,37 +17,87 @@
     <script>
         function loadPage(pageNumber) {
            var settings = {
-              "url": "https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&skip=1&take=1",
+              "url": `https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&expand=properties[coordinates]&skip=${pageNumber-1*1}&take=1`,
               "method": "GET",
               "timeout": 0,
               "headers": {
-                "Accept-Language": "en-Us",
+                "Accept-Language": "@language",
                 "Api-Key": "Mina-Emad-Radi"
               },
             };
 
             $.ajax(settings).done(function (response) {
               console.log(response);
-               let contentHtml = '';
+            $('#partial-content').html('');
+             const lang = "@language" === "ar" ? "ar-EG" : "@language";
+
+                 let contentHtml = '';
                  response.items.forEach(item => {
+                   const imgUrl = item.properties.headerImage?.url || '';
+                   const bannerCrop = item.properties.headerImage?.crops?.find(crop => crop.alias === 'Listing');
+
+                   let croppedImageUrl = '';
+                   if (bannerCrop) {
+                       const { coordinates, width, height } = bannerCrop;
+                       if(coordinates){
+                       const { x1, y1, x2, y2 } = coordinates;
+                       croppedImageUrl = ` <img src="https://localhost:44355${imgUrl}?cc=${x1},${y1},${x2},${y2}&width=${width}&height=${height} alt="${item.properties.title}" class="img-fluid mb-3 list-image" />`;
+                       }else{
+                       croppedImageUrl = ` <img src="https://localhost:44355${imgUrl}?cc=0,0,0,0&width=${width}&height=${height} alt="${item.properties.title}" class="img-fluid mb-3 list-image" />`;
+                       }
+                   }
+                   const createDate = item.createDate ? new Date(item.createDate).toLocaleDateString(lang, {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        }) : 'N/A';
+
+
+
                     contentHtml += `
-                        <div class="blog-item">
-                            <h2>${item.properties.title}</h2>
-                            <h3>${item.properties.subtitle}</h3>
-                            <img src="${item.properties.headerImage[0]?.url}" alt="${item.properties.headerImage[0]?.name}" width="600" height="400" />
-                            <p>${item.properties.bodyText.markup}</p>
-                            <a href="${item.route.path}">Read More</a>
+                        <hr class="my-4" />
+                         <div class="row">
+                        <div class="post-preview col-9">
+                            <a href="${item.route.path}">
+                                
+                                <h2 class="post-title">${item.properties.title}</h2>
+                            </a>
+                             <a href="${item.route.path}">
+
+                                <h3 class="post-subtitle">${item.properties.subtitle}</h3>
+                            </a>
+                            <span class="badge bg-secondary">${item.properties.categories[0].name || 'Uncategorized'}</span>
+                               <p class="post-meta" style="display: inline;">
+                                        Posted by
+                                on ${ createDate || 'N/A'}
+                            </p>
                         </div>
+                        <div class="col-3 ">
+                        ${croppedImageUrl}
+                        </div>
+                        </div>
+                        <hr class="my-4" />
                     `;
                 });
-                 $('#partial-content').html(contentHtml);
-           
+
+                    let paginationHtml = `
+                                       <div class="d-flex justify-content-between mb-4">
+                                           ${pageNumber > 1 ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">← Back</a>` : ''}
+                                           ${pageNumber < response.total ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>` : ''}
+                                       </div>
+                                   `;
+
+                       $('#partial-content').html(contentHtml + paginationHtml);
+                   }).fail(function (xhr, status, error) {
+                    console.error(`Error: ${xhr.status} - ${error}`);
+                    alert('Failed to load data. Please try again later.');
             });
           
         }
 
         $(document).ready(function() {
-           debugger;  
+
             loadPage(1);
         });
     </script>
