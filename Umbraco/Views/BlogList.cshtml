@@ -15,8 +15,11 @@
 
 @section Scripts {
     <script>
+        
         function loadPage(pageNumber) {
-           var settings = {
+           
+            var settings = 
+            {
               "url": `https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&expand=properties[coordinates]&skip=${pageNumber-1*1}&take=1`,
               "method": "GET",
               "timeout": 0,
@@ -26,18 +29,27 @@
               },
             };
 
-            $.ajax(settings).done(function (response) {
-              console.log(response);
-            $('#partial-content').html('');
-             const lang = "@language" === "ar" ? "ar-EG" : "@language";
+            $.ajax(settings).done(function (response) 
+            {
 
-                 let contentHtml = '';
-                 response.items.forEach(item => {
+
+
+
+                $('#partial-content').html('');
+                const lang = "@language" === "ar" ? "ar-EG" : "@language";
+
+                let contentHtml = '';
+
+                response.items.forEach(item => {
+
+                   
                    const imgUrl = item.properties.headerImage?.url || '';
                    const bannerCrop = item.properties.headerImage?.crops?.find(crop => crop.alias === 'Listing');
 
                    let croppedImageUrl = '';
-                   if (bannerCrop) {
+                   
+                   if (bannerCrop) 
+                   {
                        const { coordinates, width, height } = bannerCrop;
                        if(coordinates){
                        const { x1, y1, x2, y2 } = coordinates;
@@ -46,6 +58,7 @@
                        croppedImageUrl = ` <img src="https://localhost:44355${imgUrl}?cc=0,0,0,0&width=${width}&height=${height} alt="${item.properties.title}" class="img-fluid mb-3 list-image" />`;
                        }
                    }
+
                    const createDate = item.createDate ? new Date(item.createDate).toLocaleDateString(lang, {
                             weekday: 'long',
                             year: 'numeric',
@@ -81,20 +94,26 @@
                     `;
                 });
 
-                    let paginationHtml = `
-                                       <div class="d-flex justify-content-between mb-4">
-                                           ${pageNumber > 1 ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">← Back</a>` : ''}
-                                           ${pageNumber < response.total ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>` : ''}
-                                       </div>
-                                   `;
+                let paginationHtml = `
+                                    <div class="d-flex justify-content-between mb-4">
+                                        ${pageNumber > 1 ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber - 1})">← Back</a>` : ''}
+                                        ${pageNumber < response.total ? `<a class="btn btn-primary text-uppercase" onclick="loadPage(${pageNumber + 1})">Next →</a>` : ''}
+                                    </div>
+                                `;
 
-                       $('#partial-content').html(contentHtml + paginationHtml);
-                   }).fail(function (xhr, status, error) {
+                $('#partial-content').html(contentHtml + paginationHtml);
+
+
+
+
+              })
+
+              .fail(function (xhr, status, error) {
                     console.error(`Error: ${xhr.status} - ${error}`);
-                    alert('Failed to load data. Please try again later.');
-            });
-          
+                    alert('Failed to load data. Please try again later.');});
         }
+
+
 
         $(document).ready(function() {
 
