@@ -1,5 +1,5 @@
 ﻿class BlogApiService {
-    static async fetchBlogItems(pageNumber ) {
+    static async fetchBlogItems(pageNumber ,language ) {
         const skip = (pageNumber - 1) * BlogGlobals.pagination.itemsPerPage;
 
         try {
@@ -8,7 +8,7 @@
                 method: "GET",
                 timeout: 0,
                 headers: {
-                    "Accept-Language": window.currentLanguage,
+                    "Accept-Language": language,
                     "Api-Key": BlogGlobals.api.headers.apiKey
                 },
                 data: {
@@ -21,7 +21,7 @@
             return response;
         } catch (error) {
             console.error('Error fetching blog items:', error);
-            throw new Error(BlogGlobals.localization.translations[window.currentLanguage].errors.loadFailed);
+            throw new Error(BlogGlobals.localization.translations[language].errors.loadFailed);
         }
     }
 

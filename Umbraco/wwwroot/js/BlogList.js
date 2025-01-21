@@ -48,7 +48,7 @@
         $('#partial-content').html('');
 
         try {
-            const response = await BlogApiService.fetchBlogItems(pageNumber);
+            const response = await BlogApiService.fetchBlogItems(pageNumber, window.currentLanguage);
 
             let contentHtml = response.items
                 .map(item => this.renderBlogItem(item))
