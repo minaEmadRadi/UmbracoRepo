@@ -8,13 +8,13 @@
 
 @if (Model != null)
 {
-    <header class="masthead" style="background-image: url('@banner');  height:550px;" aria-label="Description of header image">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                        <h1>@Model.Title</h1>
-                        <span class="subheading">@Model.Subtitle</span>
+    <header class="masthead d-flex justify-content-center align-items-center " style="background-image: url('@banner');  height:550px;" aria-label="Description of header image">
+        <div class="container position-relative px-4 px-lg-5 text-center ">
+            <div class="row gx-4 gx-lg-5 justify-content-center ">
+                <div class="col-md-10 col-lg-8 col-xl-7 ">
+                    <div class="row site-heading ">
+                        <h1 class="display-2 fw-bold  my-25">@Model.Title</h1>
+                        <span class="subheading ">@Model.Subtitle</span>
                     </div>
                 </div>
             </div>

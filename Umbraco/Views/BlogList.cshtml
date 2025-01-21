@@ -18,7 +18,10 @@
 @section Scripts {
     
     <script>
-          const translations = {
+
+
+        const translations = 
+        {
             'en': {
                 next: 'Next →',
                 back: '← Back'
@@ -35,7 +38,7 @@
 
             var settings = 
             {
-              "url": `https://localhost:44355/umbraco/delivery/api/v2/content?fetch=Children:Blogs&skip=${skip}&take=3`,
+              "url": `https://localhost:44355/umbraco/delivery/api/v2/content?filter=contentType:blogItem&skip=${skip}&take=3`,
               "method": "GET",
               "timeout": 0,
               "headers": {
