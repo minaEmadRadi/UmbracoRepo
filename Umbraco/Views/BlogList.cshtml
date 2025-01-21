@@ -16,6 +16,32 @@
 </article>
 
 @section Scripts {
+    <script>
+        window.currentLanguage = "@language";
+    </script>
+    <script src="/js/blogApiService.js"></script>
+    <script src="/js/blogList.js"></script>
+    <script>
+        BlogList.init();
+    </script>
+    <script>
+        $(document).ready(function() {
+            BlogList.init();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+@* 
+@section Scripts {
     
     <script>
 
@@ -146,3 +172,4 @@
         });
     </script>
 }
+ *@
