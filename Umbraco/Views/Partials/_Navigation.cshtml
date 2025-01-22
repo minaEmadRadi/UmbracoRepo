@@ -1,6 +1,6 @@
 ﻿@inherits UmbracoViewPage
 @{
-    var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<Home>();
+    var homePage = Model.AncestorOrSelf<Home>();
     var currentPageUrl = Model.Url();
 }
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
