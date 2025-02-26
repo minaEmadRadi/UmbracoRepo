@@ -4,6 +4,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\BlockGridPreviews\navigationgroup.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Plugins\BlockGridPreviews\package.manifest" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Our.Umbraco.Community.Contentment" Version="4.7.0" />
@@ -18,7 +24,7 @@
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
 
-  <PropertyGroup>
+   <PropertyGroup>
     <!-- Razor files are needed for the backoffice to work correctly -->
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
   </PropertyGroup>
