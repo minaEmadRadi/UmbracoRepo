@@ -1,19 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@inject Umbraco.Cms.Core.Media.IImageUrlGenerator imageUrlGenerator
 @inherits UmbracoViewPage<IHeaderProperties>
 @{
+    var url = Model?.HeaderImage;
+    var banner =url?.GetCropUrl("banner", imageUrlGenerator, true);
 }
-<!-- Page Header-->
-<header class="masthead" style="background-image: url('@Model?.HeaderImage?.Url()')" aria-label="Description of header image">
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <h1>@Model.Title</h1>
-                    <span class="subheading">@Model.Subtitle</span>
+
+
+@if (Model != null)
+{
+    <header class="masthead d-flex justify-content-center align-items-center " style="background-image: url('@banner');  height:550px;" aria-label="Description of header image">
+        <div class="container position-relative px-4 px-lg-5 text-center ">
+            <div class="row gx-4 gx-lg-5 justify-content-center ">
+                <div class="col-md-10 col-lg-8 col-xl-7 ">
+                    <div class="row site-heading ">
+                        <h1 class="display-2 fw-bold  my-25">@Model.Title</h1>
+                        <span class="subheading ">@Model.Subtitle</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+}

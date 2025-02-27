@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Home</summary>
 	[PublishedModel("home")]
-	public partial class Home : PublishedContentModel, IHeaderProperties
+	public partial class Home : PublishedContentModel, IFooterProperties, IHeaderProperties, IMainNavigationProperty
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -50,12 +50,20 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// Footer Social Link: Enter footer links to display
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("footerSocialLink")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.SocialLink> FooterSocialLink => global::Umbraco.Cms.Web.Common.PublishedModels.FooterProperties.GetFooterSocialLink(this, _publishedValueFallback);
+
+		///<summary>
 		/// Header Image: Choose the image header for this page
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("headerImage")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops HeaderImage => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderProperties.GetHeaderImage(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue HeaderImage => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderProperties.GetHeaderImage(this, _publishedValueFallback);
 
 		///<summary>
 		/// Subtitle: Enter The Subtitle for this page
@@ -72,5 +80,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("title")]
 		public virtual string Title => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderProperties.GetTitle(this, _publishedValueFallback);
+
+		///<summary>
+		/// Main Navigation: Enter the main navigation items
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.6.0-rc+16749a7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("mainNavigation")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel MainNavigation => global::Umbraco.Cms.Web.Common.PublishedModels.MainNavigationProperty.GetMainNavigation(this, _publishedValueFallback);
 	}
 }

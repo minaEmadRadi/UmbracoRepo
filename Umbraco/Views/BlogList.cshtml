@@ -1,40 +1,29 @@
-﻿@{
-	Layout = "_Layout";
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlogList>
+@{
+    Layout = "_Layout";
+    var language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
+@await Html.PartialAsync("~/Views/Partials/_Header.cshtml",Model)
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div id="partial-content">
-
                 </div>
-                @* <vc:blogs page="@(int.TryParse(Context?.Request?.Query["page"], out int page) ? page : 1)" /> *@
             </div>
         </div>
     </div>
 </article>
 
-
 @section Scripts {
     <script>
-
-        function loadPage(pageNumber) {
-
-            $.ajax({
-                url: `/umbraco/surface/PartialBlogList/index?page=${pageNumber}&currentCulture=ar`,
-                method: 'GET',
-                success: function(data) {
-                   $('#partial-content').html(data);
-                },
-                error: function(xhr, status, error) {
-                      alert(`Error ${error} loading partial view.`);
-                }
-            });
-        }
-
+        window.currentLanguage = "@language";
         $(document).ready(function() {
-            loadPage(1);
+            BlogList.init();
         });
     </script>
 }
+
+
+
 

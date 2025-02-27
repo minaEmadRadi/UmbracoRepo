@@ -1,55 +1,7 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
 @{
 	Layout = "_Layout";
 }
+@await Html.PartialAsync("~/Views/Partials/_Header.cshtml", Model)
 
 
-@* @await Html.PartialAsync("_ItemsList", Model) *@
-
-@* <script> *@
-@*     const PAGE_SIZE = 10; *@
-
-@*     function loadPage(page) { *@
-@*         const container = document.getElementById('itemsListContainer'); *@
-@*         container.classList.add('loading'); *@
-
-@*         fetch(`/umbraco/api/api/getpageditems?page=${page}&pageSize=${PAGE_SIZE}`) *@
-@*             .then(response => response.json()) *@
-@*             .then(data => { *@
-@*                 let html = '<div id="itemsContainer">'; *@
-
-@*                 // Render items *@
-@*                 data.items.forEach(item => { *@
-@*                     html += ` *@
-@*                         <div class="item-card" data-id="${item.id}"> *@
-@*                             <h3>${item.name}</h3> *@
-@*                             <p>${item.description}</p> *@
-@*                         </div> *@
-@*                     `; *@
-@*                 }); *@
-
-@*                 // Render pagination *@
-@*                 html += '<div class="pagination" id="pagination">'; *@
-@*                 for (let i = 1; i <= data.totalPages; i++) { *@
-@*                     html += ` *@
-@*                         <button class="page-btn ${i === data.currentPage ? 'active' : ''}" *@
-@*                                 onclick="loadPage(${i})" *@
-@*                                 ${i === data.currentPage ? 'disabled' : ''}> *@
-@*                             ${i} *@
-@*                         </button> *@
-@*                     `; *@
-@*                 } *@
-@*                 html += '</div>'; *@
-
-@*                 container.innerHTML = html; *@
-@*             }) *@
-@*             .catch(error => { *@
-@*                 container.innerHTML = '<div class="error">Failed to load items. Please try again.</div>'; *@
-@*                 console.error('Error:', error); *@
-@*             }) *@
-@*             .finally(() => { *@
-@*                 container.classList.remove('loading'); *@
-@*             }); *@
-@*     } *@
-
-@* </script> *@
