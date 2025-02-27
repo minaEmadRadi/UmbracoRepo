@@ -41,6 +41,25 @@
    dotnet restore
    ```
 4. Set up the database and configure **Umbraco** settings.
+dotnet new install Umbraco.Templates::13.6.0-rc --force
+
+dotnet new sln --name "POC"
+dotnet new umbraco --force -n "Umbraco" --friendly-name "Administrator" --email "admin@example.com" --password "1234567890" --connection-string "server=(localdb)\MSSQLLocalDB;database=umbracoPOC;user id=umbraco;password=umbraco;TrustServerCertificate=true;" --connection-string-provider-name "Microsoft.Data.SqlClient"
+dotnet sln add "Umbraco"
+
+#Add starter kit
+dotnet add "Umbraco" package clean --version 4.1.0
+
+dotnet run --project "Umbraco"
+#Running
+
+
+"Runtomtime":{
+	"Mode":"development"
+},
+"ModelsBuilder":{
+	"ModelsMode":"SourceCodeAuto"
+}
 
 ### Development Server
 Run the following command to start the development server:
